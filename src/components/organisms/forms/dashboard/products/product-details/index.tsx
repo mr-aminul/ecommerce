@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form } from "@/components/ui/form";
 import { FormPageGridContainer, FormPageHeader, FormPageTitle } from "@/components/layout/form-page-layout/layout";
-import { product_form_schema, ProductFormType } from "../product-form/schema";
+import { product_create_schema, ProductFormType } from "../product-form/schema";
 import { Button } from "@/components/ui/button";
 import { ProductFormRightSide } from "@/components/organisms/forms/dashboard/products/product-form/right-side";
 import { ProductFormLeftSide } from "@/components/organisms/forms/dashboard/products/product-form/left-side";
@@ -24,7 +24,7 @@ const DEMO_PRODUCT: ProductFormType = {
 export default function ProductDetailsForm() {
 
   const form = useForm<ProductFormType>({
-    resolver: zodResolver(product_form_schema),
+    resolver: zodResolver(product_create_schema),
     defaultValues: DEMO_PRODUCT
   });
 

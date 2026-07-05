@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import {ShoppingBag, Inbox, Users, Settings} from "lucide-react"
+import {ShoppingBag, Inbox, Users, Settings, Store} from "lucide-react"
 import { NavUser } from "./nav-user";
 import { usePathname } from "next/navigation";
 import { isActivePath } from "@/lib/utils";
@@ -38,6 +38,11 @@ const SIDEBAR_LINKS = [
     title: "Settings",
     url: "/settings/store",
     icon: Settings
+  },
+  {
+    title: "View Store",
+    url: "/shop",
+    icon: Store
   }
 ];
 
@@ -60,9 +65,9 @@ export default function AppSidebar() {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
+              <Link href="/shop" target="_blank">
+                <span className="text-base font-semibold">Custom Eco</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -89,7 +89,7 @@ export function ProductFormRightSide({ form }: ProductFormRightSideProps) {
           <FormItem>
             <FormLabel>Status</FormLabel>
             <FormControl>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Product status" />
@@ -111,15 +111,19 @@ export function ProductFormRightSide({ form }: ProductFormRightSideProps) {
           <FormItem>
             <FormLabel>Category</FormLabel>
             <FormControl>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
+                  <SelectItem value="tops">Tops & Clothing</SelectItem>
+                  <SelectItem value="pants">Pants & Shorts</SelectItem>
+                  <SelectItem value="accessories">Accessories</SelectItem>
                   <SelectItem value="electronics">Electronics</SelectItem>
-                  <SelectItem value="Beauty">Beauty</SelectItem>
+                  <SelectItem value="kitchen">Kitchen</SelectItem>
+                  <SelectItem value="activewear">Activewear</SelectItem>
                 </SelectContent>
               </Select>
             </FormControl>

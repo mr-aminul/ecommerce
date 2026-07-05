@@ -1,12 +1,12 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Order } from "./data";
+import { AdminOrderRow } from "./data";
 import { formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Loader, MoreHorizontal } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-export const order_columns: ColumnDef<Order>[] = [
+export const order_columns: ColumnDef<AdminOrderRow>[] = [
   {
     accessorKey: "id",
     header: "ID",
@@ -22,7 +22,10 @@ export const order_columns: ColumnDef<Order>[] = [
       return <div className="space-x-4 flex items-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={order.product_img} alt={order.product_name} className="h-8 w-8 rounded-md" />
-        <span>{order.product_name}</span>
+        <div>
+          <span>{order.product_name}</span>
+          <p className="text-xs text-muted-foreground">{order.customer_name}</p>
+        </div>
       </div>
     }
   },

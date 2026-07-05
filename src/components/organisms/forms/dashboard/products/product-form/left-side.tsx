@@ -11,10 +11,18 @@ import { UseFormReturn } from "react-hook-form";
 type ProductFormLeftSideProps = {
   form: UseFormReturn<ProductFormType>,
   images: File[],
-  handleImagesChange: (newImages: File[]) => void
+  handleImagesChange: (newImages: File[]) => void,
+  existingImages?: string[],
+  onRemoveExistingImage?: (index: number) => void,
 }
 
-export function ProductFormLeftSide({ form, images, handleImagesChange }: ProductFormLeftSideProps) {
+export function ProductFormLeftSide({
+  form,
+  images,
+  handleImagesChange,
+  existingImages = [],
+  onRemoveExistingImage,
+}: ProductFormLeftSideProps) {
   return (
     <FormPageGridPrimary>
       <CardHeader>
@@ -72,6 +80,30 @@ export function ProductFormLeftSide({ form, images, handleImagesChange }: Produc
         <CardTitle>Product Images</CardTitle>
       </CardHeader>
       <CardContent>
+        {existingImages.length > 0 && (
+          <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+            {existingImages.map((url, index) => (
+              <div key={`${url}-${index}`} className="group relative aspect-square overflow-hidden rounded-md border">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={url} alt="" className="h-full w-full object-cover" />
+                {index === 0 && (
+                  <span className="absolute top-1 left-1 rounded bg-background/90 px-1.5 py-0.5 text-xs font-medium">
+                    Main
+                  </span>
+                )}
+                {onRemoveExistingImage && (
+                  <button
+                    type="button"
+                    onClick={() => onRemoveExistingImage(index)}
+                    className="absolute top-1 right-1 rounded bg-destructive px-1.5 py-0.5 text-xs text-destructive-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
         <ImageUploader
           images={images}
           onImagesChange={handleImagesChange} />

@@ -6,7 +6,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Custom Eco",
-  description: "Checking UI Stuff",
+  description: "Ecommerce admin dashboard and storefront",
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${GeistSans.variable} font-sans ${GeistMono.variable} antialiased`}
       >

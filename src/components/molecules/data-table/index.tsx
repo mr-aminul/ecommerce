@@ -11,10 +11,16 @@ type DataTableProps<TData, TValue> = {
     searchColumn: string,
     searchPlaceholder: string,
     filters?: DataTableToolbarFilters[],
-  }
+  },
+  onRowClick?: (row: TData) => void,
 }
 
-export default function DataTable<TData, TValue>({ columns, data, toolbar }: DataTableProps<TData, TValue>) {
+export default function DataTable<TData, TValue>({
+  columns,
+  data,
+  toolbar,
+  onRowClick,
+}: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -44,7 +50,7 @@ export default function DataTable<TData, TValue>({ columns, data, toolbar }: Dat
         searchPlaceholder={toolbar.searchPlaceholder}
         filters={toolbar.filters}
       />
-      <div className="overflow-hidden rounded-md border">
+      <div className="overflow-x-auto rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -71,6 +77,23 @@ export default function DataTable<TData, TValue>({ columns, data, toolbar }: Dat
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className={onRowClick ? "cursor-pointer" : undefined}
+                  tabIndex={onRowClick ? 0 : undefined}
+                  onClick={
+                    onRowClick
+                      ? () => onRowClick(row.original)
+                      : undefined
+                  }
+                  onKeyDown={
+                    onRowClick
+                      ? (event) => {
+                          if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            onRowClick(row.original);
+                          }
+                        }
+                      : undefined
+                  }
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
